@@ -37,14 +37,16 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => null,
         ],
         'response' => [
             'format' => yii\web\Response::FORMAT_JSON,
+            'charset' => 'UTF-8',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => false,
             'rules' => [
                 'GET api/vacancies' => 'vacancy/index',
                 'GET api/vacancies/<id:\d+>' => 'vacancy/view',

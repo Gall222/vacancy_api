@@ -14,8 +14,8 @@ return [
                 getenv('TEST_DB_HOST') ?: 'db_test',
                 getenv('TEST_DB_DATABASE') ?: 'vacancy_test'
             ),
-            'username' => getenv('TEST_DB_USERNAME') ?: 'user',
-            'password' => getenv('TEST_DB_PASSWORD') ?: 'password',
+            'username' => 'root',
+            'password' => 'root',
             'charset' => 'utf8mb4',
         ],
     ],

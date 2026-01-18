@@ -6,13 +6,13 @@ namespace common\modules\vacancy\services;
 
 use common\modules\vacancy\mappers\ActionMapperInterface;
 use common\modules\vacancy\models\Vacancy;
-use common\modules\vacancy\repositories\VacancyRepository;
+use common\modules\vacancy\repositories\VacancyRepositoryInterface;
 use yii\db\Exception;
 
 final class VacancyService implements VacancyServiceInterface
 {
     public function __construct(
-        private VacancyRepository $repository,
+        private VacancyRepositoryInterface $repository,
         private ActionMapperInterface $mapper
     ) {}
 

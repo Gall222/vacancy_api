@@ -63,15 +63,3 @@ swagger:
 test:
 	docker compose $(COMPOSE) $(ENV) exec php \
 		bash -c "php vendor/bin/codecept run"
-
-migrate-test2:
-	docker compose $(COMPOSE) $(ENV) exec php \
-		bash -c "YII_ENV=test php yii migrate --interactive=0"
-
-migrate-test-down:
-	docker compose $(COMPOSE) $(ENV) exec php \
-		bash -c "YII_ENV=test php yii migrate/down $(ARGS)"
-
-up-test-db:
-	docker compose $(COMPOSE) $(ENV) up -d db_test
-
