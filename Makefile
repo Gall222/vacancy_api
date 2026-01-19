@@ -63,3 +63,15 @@ swagger:
 test:
 	docker compose $(COMPOSE) $(ENV) exec php \
 		bash -c "php vendor/bin/codecept run"
+
+frontend-build:
+	docker compose $(COMPOSE) $(ENV) build frontend
+
+frontend-up:
+	docker compose $(COMPOSE) $(ENV) up -d frontend
+
+frontend-logs:
+	docker compose $(COMPOSE) $(ENV) logs -f frontend
+
+frontend-down:
+	docker compose $(COMPOSE) $(ENV) stop frontend
