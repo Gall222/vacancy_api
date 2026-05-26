@@ -2,24 +2,25 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-# Устанавливаем pnpm
-RUN npm install -g pnpm
+RUN npm i -g pnpm
 
-# Копируем package.json
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml ./
 
-# Устанавливаем зависимости
-RUN pnpm install --ignore-scripts
+# Обновляем lockfile перед установкой
+RUN pnpm install --no-frozen-lockfile --ignore-scripts
 
-# Удаляем проблемные символические ссылки
-RUN find node_modules -type l -delete || true
+# Ручной запуск необходимых скриптов
+RUN pnpm approve-builds --force || true
+RUN pnpm rebuild
 
-# Копируем остальные файлы
+# Генерация .nuxt
+RUN npx nuxt prepare
+
 COPY . .
 
-# Переустанавливаем зависимости для корректного создания ссылок
-RUN rm -rf node_modules && pnpm install --ignore-scripts
+# Обновляем lockfile с учетом всех изменений
+RUN pnpm install --no-frozen-lockfile
 
 EXPOSE 3000
 
-CMD ["pnpm", "dev"]
+CMD ["pnpm", "dev", "--host", "--no-install"]
