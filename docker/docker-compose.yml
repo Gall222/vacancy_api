@@ -15,7 +15,8 @@ services:
       - /app/node_modules
     networks:
       - app
-
+    environment:
+      - CI=true
   php:
     container_name: ${APP_NAME}-php
     build:

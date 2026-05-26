@@ -9,11 +9,14 @@ use common\modules\vacancy\models\Vacancy;
 use common\modules\vacancy\services\VacancyServiceInterface;
 use Yii;
 use yii\db\Exception;
-use yii\web\Controller;
+use yii\filters\ContentNegotiator;
+use yii\filters\VerbFilter;
+use yii\rest\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Request;
 use OpenApi\Annotations as OA;
-
+use yii\filters\Cors;
+use yii\web\Response;
 
 final class VacancyController extends Controller
 {
@@ -29,6 +32,38 @@ final class VacancyController extends Controller
         $this->vacancyService = $vacancyService;
 
         parent::__construct($id, $module, $config);
+    }
+
+    public function behaviors(): array
+    {
+        $behaviors = parent::behaviors();
+
+        unset($behaviors['authenticator']); // если есть
+
+        $behaviors['contentNegotiator'] = [
+            'class' => ContentNegotiator::class,
+            'formats' => [
+                'application/json' => Response::FORMAT_JSON,
+            ],
+        ];
+
+        $behaviors['corsFilter'] = [
+            'class' => Cors::class,
+            'cors' => [
+                'Origin' => ['http://localhost:3000'],
+                'Access-Control-Request-Method' => ['GET', 'POST', 'OPTIONS'],
+                'Access-Control-Request-Headers' => ['*'],
+                'Access-Control-Allow-Credentials' => false,
+                'Access-Control-Max-Age' => 86400,
+            ],
+        ];
+
+        return $behaviors;
+    }
+
+    public function actionOptions()
+    {
+        Yii::$app->response->statusCode = 204;
     }
 
     /**
@@ -91,7 +126,8 @@ final class VacancyController extends Controller
      */
     public function actionCreate(Request $request): Vacancy
     {
-        $vacancy = $this->vacancyService->create($request->post());
+        $vacancy = $this->vacancyService->create($request->bodyParams);
+
         Yii::$app->response->setStatusCode(ResponseCode::CREATED);
 
         return $vacancy;

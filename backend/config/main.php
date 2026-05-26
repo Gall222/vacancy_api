@@ -9,7 +9,11 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'swagger' => [
+            'class' => 'light\swagger\SwaggerModule',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -42,6 +46,13 @@ return [
         'response' => [
             'format' => yii\web\Response::FORMAT_JSON,
             'charset' => 'UTF-8',
+            'formatters' => [
+                yii\web\Response::FORMAT_JSON => [
+                    'class' => yii\web\JsonResponseFormatter::class,
+                    'prettyPrint' => YII_DEBUG,
+                    'encodeOptions' => JSON_UNESCAPED_UNICODE,
+                ],
+            ],
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,

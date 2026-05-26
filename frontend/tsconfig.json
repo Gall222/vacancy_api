@@ -14,5 +14,17 @@
     {
       "path": "./.nuxt/tsconfig.node.json"
     }
-  ]
+  ],
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "lib": ["ES2023", "DOM"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["@types/node", "nuxt"]
+  }
 }
