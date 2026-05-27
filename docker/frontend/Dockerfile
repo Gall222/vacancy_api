@@ -2,25 +2,28 @@ FROM node:22-alpine
 
 WORKDIR /app
 
+# Установка pnpm
 RUN npm i -g pnpm
 
+# Копирование package.json и pnpm-lock.yaml для кэширования
 COPY package.json pnpm-lock.yaml ./
 
-# Обновляем lockfile перед установкой
+# Установка зависимостей с обновлением lockfile, но без выполнения скриптов
 RUN pnpm install --no-frozen-lockfile --ignore-scripts
 
-# Ручной запуск необходимых скриптов
+# Ручной запуск необходимых скриптов сборки
 RUN pnpm approve-builds --force || true
 RUN pnpm rebuild
 
-# Генерация .nuxt
-RUN npx nuxt prepare
 
+# Копирование остальных файлов проекта
 COPY . .
 
-# Обновляем lockfile с учетом всех изменений
-RUN pnpm install --no-frozen-lockfile
+# Генерация .nuxt после копирования всех файлов
+RUN npx nuxt prepare
 
 EXPOSE 3000
 
+
+# Прямой запуск без использования скрипта
 CMD ["pnpm", "dev", "--host", "--no-install"]

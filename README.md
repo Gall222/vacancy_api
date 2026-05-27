@@ -28,16 +28,7 @@
 ## 1. Клонирование репозитория
 
 ```bash
-git clone <repo_url>
-cd vacancy-api
-```
-
----
-
-## 2. Запуск Docker
-
-```bash
-docker compose up -d --build
+make init
 ```
 
 ---
@@ -103,50 +94,8 @@ Body:
 ```
 
 ---
-
-# Структура проекта
-
-## backend
-
-Yii2 REST API
-
-## frontend
-
-Nuxt3 SPA приложение
-
-## common
-
-Общие модели, сервисы, репозитории
-
-## docker
-
-Docker configuration
-
----
-
-# Возможности
-
-* CRUD вакансий
-* Сортировка
-* Пагинация
-* Детальный просмотр
-* Swagger/OpenAPI
-* Docker deployment
-* Backend tests
-* Frontend validation
-
----
-
 # Тесты
 
-## Backend
-
 ```bash
-docker exec -it backend php vendor/bin/codecept run
-```
-
-## Frontend
-
-```bash
-npm run test
+make test
 ```

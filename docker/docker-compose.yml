@@ -13,10 +13,13 @@ services:
     volumes:
       - ../frontend:/app
       - /app/node_modules
+      - /app/.nuxt
     networks:
       - app
     environment:
       - CI=true
+      - NODE_ENV=development
+      - PNPM_FROZEN_LOCKFILE=false
   php:
     container_name: ${APP_NAME}-php
     build:
