@@ -5,25 +5,18 @@ WORKDIR /app
 # Установка pnpm
 RUN npm i -g pnpm
 
-# Копирование package.json и pnpm-lock.yaml для кэширования
-COPY package.json pnpm-lock.yaml ./
+# Копирование файлов
+COPY package.json pnpm-lock.yaml .npmrc* ./
 
-# Установка зависимостей с обновлением lockfile, но без выполнения скриптов
+# Установка зависимостей с игнорированием lockfile
 RUN pnpm install --no-frozen-lockfile --ignore-scripts
 
-# Ручной запуск необходимых скриптов сборки
-RUN pnpm approve-builds --force || true
-RUN pnpm rebuild
-
-
-# Копирование остальных файлов проекта
+# Копирование исходников
 COPY . .
 
-# Генерация .nuxt после копирования всех файлов
+# Генерация .nuxt
 RUN npx nuxt prepare
 
 EXPOSE 3000
 
-
-# Прямой запуск без использования скрипта
-CMD ["pnpm", "dev", "--host", "--no-install"]
+CMD ["pnpm", "dev", "--host", "0.0.0.0"]

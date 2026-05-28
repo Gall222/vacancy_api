@@ -19,7 +19,8 @@ services:
     environment:
       - CI=true
       - NODE_ENV=development
-      - PNPM_FROZEN_LOCKFILE=false
+      - NUXT_TELEMETRY_DISABLED=1
+      - PNPM_IGNORE_SCRIPTS=true
   php:
     container_name: ${APP_NAME}-php
     build:
