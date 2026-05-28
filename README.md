@@ -96,6 +96,12 @@ Body:
 ---
 # Тесты
 
+Backend:
 ```bash
 make test
+```
+
+Frontend:
+```bash
+make test-frontend
 ```

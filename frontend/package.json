@@ -7,7 +7,10 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:unit": "vitest run --test-timeout=10000"
   },
   "dependencies": {
     "vue": "^3.5.34",
@@ -15,6 +18,14 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.14.0",
-    "nuxt": "^4.4.6"
+    "@types/jsdom": "^28.0.3",
+    "@types/testing-library__vue": "^5.0.0",
+    "@vitejs/plugin-vue": "^6.0.7",
+    "@vue/test-utils": "^2.4.10",
+    "jsdom": "^29.1.1",
+    "nuxt": "^4.4.6",
+    "typescript": "^6.0.3",
+    "vite": "^7.3.3",
+    "vitest": "^4.1.7"
   }
 }

@@ -75,3 +75,16 @@ frontend-logs:
 
 frontend-down:
 	docker compose $(COMPOSE) $(ENV) stop frontend
+
+.PHONY: test-frontend test-unit
+
+# Frontend tests
+test-frontend:
+	cd frontend && npm install && npm run test
+
+test-frontend-watch:
+	cd frontend && npm run test:watch
+
+# Для запуска через Docker
+docker-test-frontend:
+	docker compose $(COMPOSE) $(ENV) exec frontend npm run test
