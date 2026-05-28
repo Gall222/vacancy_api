@@ -1,31 +1,8 @@
 # Vacancy API
 
-Тестовое задание: сервис управления вакансиями.
-
-## Стек
-
-### Backend
-
-* PHP 8.1
-* Yii2
-* MySQL 8
-* Swagger/OpenAPI
-
-### Frontend
-
-* Nuxt 3
-* TypeScript
-
-### Infrastructure
-
-* Docker
-* Docker Compose
-
----
+Сервис управления вакансиями.
 
 # Запуск проекта
-
-## 1. Клонирование репозитория
 
 ```bash
 make init
@@ -41,6 +18,31 @@ make init
 | Backend API | http://localhost:8080/api     |
 | Swagger     | http://localhost:8080/swagger |
 | MySQL       | localhost:3306                |
+
+---
+
+## Стек
+
+### Backend
+
+* PHP 8.2
+* Yii2
+* MySQL 8
+* Swagger/OpenAPI
+
+### Frontend
+
+* Nuxt 4
+* Vue 3
+* TypeScript
+* TailwindCSS
+* PNPM
+
+### Infrastructure
+
+* Docker
+* Docker Compose
+* Make
 
 ---
 
