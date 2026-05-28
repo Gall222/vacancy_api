@@ -105,5 +105,5 @@ make test
 
 Frontend:
 ```bash
-make test-frontend
+make docker-test-frontend
 ```
